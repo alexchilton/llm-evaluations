@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  langfuse-server:
+    image: langfuse/langfuse:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - DATABASE_URL=postgresql://langfuse:langfuse@db:5432/langfuse
+      - NEXTAUTH_SECRET=changeme-secret-key-here
+      - SALT=changeme-salt-here
+      - NEXTAUTH_URL=http://localhost:3001
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=langfuse
+      - POSTGRES_PASSWORD=langfuse
+      - POSTGRES_DB=langfuse
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

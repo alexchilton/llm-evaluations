@@ -1,0 +1,31 @@
+# =============================================================================
+# Requirements for evaluation notebooks + agentic paradigms demo
+# =============================================================================
+
+# --- Existing notebook deps (nvidia_dnn_eval + rag_eval) ---
+anthropic>=0.90.0
+datasets>=4.0.0
+transformers>=5.0.0
+torch>=2.0.0
+pandas>=3.0.0
+numpy>=2.0.0
+matplotlib>=3.10.0
+tqdm>=4.60.0
+PyYAML>=6.0
+lm-eval>=0.4.0
+sentence-transformers>=5.0.0
+deepeval>=3.0.0
+faiss-cpu>=1.13.0
+colorama>=0.4.0
+kaggle-benchmarks>=0.3.0
+# nemo-microservices  # enterprise SDK — requires NVIDIA account, commented out
+
+# --- Agentic paradigms demo deps ---
+smolagents>=1.15.0
+langfuse>=2.0.0
+openai>=1.0.0
+rich>=13.0.0
+structlog>=24.0.0
+scipy>=1.11.0
+python-dotenv>=1.0.0
+litellm>=1.0.0

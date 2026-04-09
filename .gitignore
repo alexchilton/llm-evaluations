@@ -1,0 +1,11 @@
+.env
+.venv/
+.idea/
+.deepeval/
+.qodo/
+__pycache__/
+*.pyc
+swarm_state.db
+run_log.jsonl
+.ipynb_checkpoints/
+.claude/

@@ -1,0 +1,21 @@
+model:
+  primary: "unsloth/Qwen3.5-35B-A3B"
+  judge: "unsloth/Qwen3.5-35B-A3B"
+  llm_base: "http://127.0.0.1:8001/v1"
+
+swarm:
+  num_agents: 8
+  num_generations: 6
+  convergence_threshold: 0.8
+  top_k_context: 5
+
+multi_agent:
+  enable_handoff_eval: true
+
+adas:
+  max_agents: 5
+
+observability:
+  langfuse_host: "http://localhost:3001"
+  swarm_db_path: "./swarm_state.db"
+  log_level: "INFO"

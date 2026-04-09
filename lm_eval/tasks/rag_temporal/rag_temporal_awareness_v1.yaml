@@ -1,0 +1,13 @@
+dataset_kwargs:
+  data_files:
+    train: rag_temporal_awareness_v1.jsonl
+dataset_path: json
+doc_to_target: '{{reference}}'
+doc_to_text: '{{input.prompt}}'
+metric_list:
+- aggregation: mean
+  higher_is_better: true
+  metric: accuracy
+output_type: generate_until
+task: rag_temporal_awareness_v1
+training_split: train
