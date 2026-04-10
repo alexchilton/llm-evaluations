@@ -61,7 +61,7 @@ Score the recommendation from 0.0 to 1.0 on each dimension:
 Then compute an overall score as: (clarity * 0.3) + (reasoning * 0.4) + (completeness * 0.3)
 
 Output ONLY valid JSON, no other text:
-{{"clarity": 0.0, "reasoning": 0.0, "completeness": 0.0, "overall": 0.0}}"""
+{{"clarity": <score>, "reasoning": <score>, "completeness": <score>, "overall": <score>}}"""
 
 
 def score(
