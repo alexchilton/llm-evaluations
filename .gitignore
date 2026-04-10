@@ -8,4 +8,5 @@ __pycache__/
 swarm_state.db
 run_log.jsonl
 .ipynb_checkpoints/
+rag_index/
 .claude/
