@@ -2,7 +2,7 @@
 
 A collection of notebooks covering LLM evaluation, RAG testing, drift detection, agentic paradigms, and production observability — all running locally on llama.cpp with no cloud API dependencies for the core workflows.
 
-**Stack:** Python · llama.cpp (Qwen 3.5 35B) · FAISS · sentence-transformers · Arize Phoenix · Langfuse · MLflow
+**Stack:** Python · llama.cpp (Qwen3-30B) · FAISS · sentence-transformers · Arize Phoenix · Langfuse · MLflow
 
 ---
 
@@ -101,7 +101,27 @@ The version of `rag_testing.ipynb` where nothing is faked. Real documents, real 
 
 ---
 
-### 6. `observability/phoenix_tutorial.ipynb` — Production LLM Observability with Phoenix
+### 6. `rag_dashboard.ipynb` — Live RAG Evaluation Dashboard
+
+A single notebook that acts as the control panel for the production RAG system — real queries, real evaluation, real drift detection, all visualised in one place. No synthetic data.
+
+| Section | What it covers |
+|---------|---------------|
+| 0 | Health check — Phoenix, LLM, FAISS index, QA pairs |
+| 1 | Pipeline run — 30 live queries with progress bar and Phoenix trace links |
+| 2 | Retrieval quality — hit@5, MRR, precision@5, context precision; cluster bar chart, MRR scatter, failure table |
+| 3 | Answer quality — LLM-as-judge (hallucination, relevance, correctness); stacked bar, histogram, heatmap, correlation plot, worst-5 table |
+| 4 | Drift detection — current vs baseline comparison; metric trend lines with baseline band; drift report table |
+| 5 | Agent evaluation — 10 agent runs (RAG / calculator / both); trajectory table, tool usage chart, step histogram, agent vs direct comparison |
+| 6 | Summary — radar chart across all metrics; green/amber/red status table; Phoenix trace links |
+
+The notebook imports from the `rag/` package (see below) — no pipeline logic is inlined. Results are cached to `pipeline_results.csv` and `eval_results.csv` so individual sections can be rerun without re-querying.
+
+**What to expect:** Section 1 takes ~2–4 min (30 real LLM calls). Section 3 (LLM judge) takes ~5–10 min at 30B scale. All other sections are instant. Run Section 4 twice to see drift detection activate.
+
+---
+
+### 7. `observability/phoenix_tutorial.ipynb` — Production LLM Observability with Phoenix
 
 A complete tutorial from basic tracing to production-grade monitoring, using entirely local infrastructure. Runs against Phoenix at `http://localhost:6006`.
 
@@ -133,7 +153,7 @@ pip install -r requirements.txt
 # Copy env template (only needed for API-dependent notebook sections)
 cp .env.example .env
 
-# Ensure llama.cpp is serving Qwen at http://127.0.0.1:8001/v1
+# Ensure llama.cpp is serving Qwen at http://127.0.0.1:8002/v1
 # Ensure Phoenix is running at http://localhost:6006
 
 # Launch any notebook
@@ -142,7 +162,7 @@ jupyter notebook
 
 ## Hardware
 
-Tested on M4 Mac, 48GB RAM. llama.cpp serving `Qwen3.5-35B-A3B-UD-Q4_K_XL.gguf` fully GPU-offloaded at `http://127.0.0.1:8001/v1` (alias: `unsloth/Qwen3.5-35B-A3B`).
+Tested on M4 Mac, 48GB RAM. llama.cpp serving `qwen3-30b-instruct` fully GPU-offloaded at `http://127.0.0.1:8002/v1`.
 
 For smaller hardware, reduce swarm parameters in `config.yaml` and expect longer inference times in judge-heavy cells.
 
@@ -158,6 +178,20 @@ rag_testing_guide.md         # Interpretation guide for rag_testing.ipynb
 rag_real.ipynb               # Real RAG pipeline with FAISS + LLM judge
 rag_real_system.py           # RAG pipeline classes for rag_real.ipynb
 rag_qa_pairs.jsonl           # Ground truth QA pairs (generated at runtime)
+rag_dashboard.ipynb          # Live RAG evaluation dashboard (real data, 6 sections)
+rag/                         # Production RAG package
+├── pipeline.py              #   RAGPipeline — retrieve + generate with OTel tracing
+├── agent.py                 #   RAGAgent — ReAct tool-using agent
+├── retriever.py             #   FAISS retrieval
+├── generator.py             #   LLM generation with span capture
+├── drift.py                 #   DriftDetector — baseline + z-score drift alerts
+├── runner.py                #   EvaluationRunner — orchestrates evals + Phoenix posting
+├── dataset.py               #   QADataset — load/save QA pairs
+└── evaluators/
+    ├── code_evals.py        #   hit_rate, MRR, precision, context_precision, etc.
+    ├── llm_evals.py         #   hallucination, relevance, correctness (LLM-as-judge)
+    ├── agent_evals.py       #   tool_accuracy, step_efficiency
+    └── poster.py            #   post_eval_scores() → Phoenix trace annotations
 observability/
 └── phoenix_tutorial.ipynb   # Full Phoenix observability + evaluation tutorial
 paradigms/                   # Agent paradigm implementations

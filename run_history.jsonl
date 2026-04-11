@@ -1,0 +1,4 @@
+{"timestamp": "2026-04-11T11:35:58.180322+00:00", "hit_rate": 1.0, "mrr": 0.9611, "hallucination_score": 1.0, "relevance_score": 1.0, "correctness_score": 0.91, "latency_ms": 2867.78}
+{"timestamp": "2026-04-11T11:47:12.010547+00:00", "hit_rate": 1.0, "mrr": 0.9611, "hallucination_score": 0.9667, "relevance_score": 1.0, "correctness_score": 0.8933, "latency_ms": 2099.7133}
+{"timestamp": "2026-04-11T12:08:46.880841+00:00", "hit_rate": 1.0, "mrr": 0.9611, "hallucination_score": 0.9667, "relevance_score": 1.0, "correctness_score": 0.8933, "latency_ms": 2099.7133, "context_precision": 0}
+{"timestamp": "2026-04-11T12:11:50.866513+00:00", "hit_rate": 1.0, "mrr": 0.9611, "hallucination_score": 0.9667, "relevance_score": 0.9667, "correctness_score": 0.88, "latency_ms": 2742.3267, "context_precision": 0.7867}

@@ -1,0 +1,863 @@
+question,generated_answer,expected_answer,context,trace_id,latency_ms,retrieved_doc_ids,relevant_doc_ids,top_retrieval_score,cluster,source_article,_ret_ids,_rel_ids,hit_rate,mrr,precision_at_k,contains_expected,answer_length_ok,context_precision,hallucination_score,relevance_score,correctness_score,hallucination_label,hallucination_numeric,relevance_label,relevance_numeric,correctness_numeric
+What is Large language model and how does it work?,"A large language model (LLM) is a computational model designed for natural language processing tasks like text generation, summarization, translation, and parsing. It works by learning contextual relationships from vast amounts of human-written text, enabling it to generate human-like text. Despite their scale and sophistication, LLMs have limitations that restrict their use in high-stakes applications.","A large language model (LLM) is a computational model designed to perform natural language processing tasks, especially language generation, using contextual relationships derived from a large set of training data. LLMs can generate, summarize, translate and parse text in a variety of contexts, and ","[Source: Large language model]
+. The qualifier ""large"" in ""large language model"" is inherently vague, as there is no definitive threshold for the number of parameters required to qualify as ""large"".
+
+---
+
+[Source: Large language model]
+A large language model (LLM) is a computational model designed to perform natural language processing tasks, especially language generation, using contextual relationships derived from a large set of training data. LLMs can generate, summarize, translate and parse text in a variety of contexts, and are the technological underpinning of modern chatbots. LLMs can accurately mimic natural language patterns because they are trained on collections of human-written text
+
+---
+
+[Source: Large language model]
+== Limitations and challenges ==
+Despite sophisticated architectures and massive scale, large language models exhibit persistent and well-documented limitations that constrain their deployment in high-stakes applications.
+
+---
+
+[Source: Fine-tuning (deep learning)]
+. A language model with billions of parameters may be LoRA fine-tuned with only several millions of parameters.
+
+---
+
+[Source: Transformer (deep learning)]
+In general, there are 3 classes of language modelling tasks: ""masked"", ""autoregressive"", and ""prefixLM"". These classes are independent of a specific modeling architecture such as transformer, but they are often discussed in the context of transformer.",2c0ddce4ab1d13fa7beb464a970658a6,26958.6,"[""doc_14"", ""doc_9"", ""doc_25""]","[""doc_14""]",0.611,ai_ml,Large language model,"['doc_14', 'doc_9', 'doc_25']",['doc_14'],1.0,1.0,0.3333333333333333,0.30158730158730157,1.0,0.8,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'cb3e79ab3a611d94f87b00eb334b85ca'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '4b5ae6e1bdee430e459020260f7837b6'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': 'a863666e33f95bef314a59dd88c3504b'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+Explain the key concepts behind Transformer (deep learning).,"onnections and layer normalization.  
+- **Encoder-decoder architecture**: Both encoder and decoder layers use these components to process and generate outputs.  
+- **Vision Transformers (ViT)**: Adapt the Transformer for images by splitting them into patches, converting them into vectors, and treating them as tokens.  
+- **Efficient implementation**: Available in frameworks like TensorFlow and PyTorch, with libraries like Hugging Face’s Transformers providing pretrained models and architectures.","In deep learning, the transformer is a family of artificial neural network architectures based on the multi-head attention mechanism, in which text is converted to numerical representations called tokens, and each token is converted into a vector via lookup from a word embedding table. At each layer","[Source: Transformer (deep learning)]
+In deep learning, the transformer is a family of artificial neural network architectures based on the multi-head attention mechanism, in which text is converted to numerical representations called tokens, and each token is converted into a vector via lookup from a word embedding table
+
+---
+
+[Source: Transformer (deep learning)]
+=== Efficient implementation ===
+The transformer model has been implemented in standard deep learning frameworks such as TensorFlow and PyTorch. Transformers is a library produced by Hugging Face that supplies transformer-based architectures and pretrained models.
+
+---
+
+[Source: Transformer (deep learning)]
+Vision transformers adapt the transformer to computer vision by breaking down input images as a series of patches, turning them into vectors, and treating them like embedding vector of tokens in a standard transformer.
+
+---
+
+[Source: Transformer (deep learning)]
+Both the encoder and decoder layers have a feed-forward neural network for additional processing of their outputs and contain residual connections and layer normalization steps. These feed-forward layers contain most of the parameters in a transformer model.
+
+---
+
+[Source: Transformer (deep learning)]
+The attention mechanism used in the transformer architecture are scaled dot-product attention units. For each unit, the transformer model learns three weight matrices: the query weights 
+  
+    
+      
+        
+          W
+          
+            Q
+          
+        
+      
+    
+    {\displaystyle W^{Q}}
+  
+, the key weights 
+  
+    
+      
+        
+          W
+          
+            K
+          
+        
+      
+    
+    {\displaystyle W^{K}}
+  
+, and the value weights",a0ffca149d5492ef37db0f835bffb1a6,4196.8,"[""doc_25""]","[""doc_25""]",0.5312,ai_ml,Transformer (deep learning),['doc_25'],['doc_25'],1.0,1.0,1.0,0.08536585365853659,1.0,0.6,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'dfb1d80f1235d8b7db2390c5adbfe394'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 0.0, 'label': 'LOW', 'metadata': {'trace_id': '0855567fd7bdd3ba1eaeb9823cc54c40'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.4, 'metadata': {'trace_id': '0511c321c46b5280534904b16d0405d1'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,LOW,0.0,0.4
+Explain the key concepts behind Retrieval-augmented generation.,"tion not present in their training data.  
+2. **Query-Driven Retrieval**: Given a user query, a retriever (often using vector embeddings) identifies the most relevant documents from a database.  
+3. **Contextual Generation**: The LLM generates responses by combining the query with context from retrieved documents, enhancing accuracy and relevance.  
+4. **Dynamic Updates**: New information can be added to the external knowledge base without retraining the LLM, enabling efficient model adaptation.","Retrieval-augmented generation (RAG) is a technique that enables large language models (LLMs) to retrieve and incorporate new information from external data sources. With RAG, LLMs first refer to a specified set of documents, then respond to user queries. These documents supplement information from ","[Source: Large language model]
+=== Retrieval-augmented generation ===
+
+---
+
+[Source: Prompt engineering]
+=== Retrieval-augmented generation (RAG) ===
+Retrieval-augmented generation is a technique that enables GenAI models to retrieve and incorporate new information. It modifies interactions with an LLM so that the model responds to user queries with reference to a specified set of documents, using this information to supplement information from its pre-existing training data. This allows LLMs to use domain-specific and/or updated information.
+
+---
+
+[Source: Retrieval-augmented generation]
+Retrieval-augmented generation (RAG) enhances large language models (LLMs) by incorporating an information-retrieval mechanism that allows models to access and utilize additional data beyond their original training set. Ars Technica notes that ""when new information becomes available, rather than having to retrain the model, all that’s needed is to augment the model’s external knowledge base with the updated information"" (""augmentation"")
+
+---
+
+[Source: Retrieval-augmented generation]
+Retrieval-augmented generation (RAG) is a technique that enables large language models (LLMs) to retrieve and incorporate new information from external data sources. With RAG, LLMs first refer to a specified set of documents, then respond to user queries. These documents supplement information from the LLM's pre-existing training data. This allows LLMs to use domain-specific and/or updated information that is not available in the training data
+
+---
+
+[Source: Large language model]
+Retrieval-augmented generation (RAG) is an approach that integrates LLMs with document retrieval systems. Given a query, a document retriever is called to retrieve the most relevant documents. This is usually done by encoding the query and the documents into vectors, then finding the documents with vectors (usually stored in a vector database) most similar to the vector of the query. The LLM then generates an output based on both the query and context included from the retrieved documents.",6e668f7c6ebd095a894cf3c42f3685a4,3095.1,"[""doc_14"", ""doc_19"", ""doc_22""]","[""doc_22""]",0.3741,ai_ml,Retrieval-augmented generation,"['doc_14', 'doc_19', 'doc_22']",['doc_22'],1.0,0.3333333333333333,0.3333333333333333,0.11363636363636363,1.0,0.8,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '4cced8fa358a40a52c033515a508514a'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'b1cda93155f9ec8e2195ee4eaf5a6f97'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.9, 'metadata': {'trace_id': '3f5a96fd0aca1bbc20584274948cc4c5'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.9
+What is Prompt engineering and how does it work?,"engineering is the process of structuring natural language inputs (prompts) to guide generative AI models toward producing desired outputs. It involves refining wording, providing context, specifying style, and assigning roles to improve accuracy, usefulness, and consistency. Techniques include chain-of-thought, tree-of-thought, and retrieval-augmented generation (RAG). Automated prompt engineering uses algorithms to optimize prompts via gradients, feedback, or evolution, reducing manual effort.",Prompt engineering is the process of structuring natural language inputs (known as prompts) to produce specified outputs from a generative artificial intelligence (GenAI) model. Context engineering is the related area of software engineering that focuses on the management of non-prompt contexts supp,"[Source: Prompt engineering]
+The Oxford English Dictionary defines prompt engineering as ""The action or process of formulating and refining prompts for an artificial intelligence program, algorithm, etc., in order to optimize its output or to achieve a desired outcome; the discipline or profession concerned with this."" In 2023, prompt (""an instruction given to an artificial intelligence program, algorithm, etc., which determines or influences the content it generates"") was the runner-up to Oxford's word of the year.
+
+---
+
+[Source: Prompt engineering]
+. The process of prompt engineering may involve designing clear queries, refining wording, providing relevant context, specifying the style of output, and assigning a character for the AI to mimic in order to guide the model toward more accurate, useful, and consistent responses.
+
+---
+
+[Source: Prompt engineering]
+Prompt engineering is the process of structuring natural language inputs (known as prompts) to produce specified outputs from a generative artificial intelligence (GenAI) model. Context engineering is the related area of software engineering that focuses on the management of non-prompt contexts supplied to the GenAI model, such as metadata, API tools, and tokens.
+
+---
+
+[Source: Prompt engineering]
+=== Techniques ===
+Common terms used to describe various specific prompt engineering techniques include chain-of-thought, tree-of-thought, and retrieval-augmented generation (RAG). A 2024 survey of the field identified over 50 distinct text-based prompting techniques, 40 multimodal variants, and a vocabulary of 33 terms used across prompting research, highlighting a present lack of standardised terminology for prompt engineering.
+
+---
+
+[Source: Prompt engineering]
+== Automated prompt generation ==
+Recent research has explored automated prompt engineering, using optimization algorithms to generate or refine prompts without human intervention. These automated approaches aim to identify effective prompt patterns by analyzing model gradients, reinforcement feedback, or evolutionary processes, reducing the need for manual experimentation.",969b74bc37e573cb2754f8197e8c8d58,1608.3,"[""doc_19""]","[""doc_19""]",0.2871,ai_ml,Prompt engineering,['doc_19'],['doc_19'],1.0,1.0,1.0,0.15584415584415584,1.0,1.0,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'e5b9f5df5cdf09e87e461724b378778a'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'fc81cb6f8c71ed625c2a9809db19f721'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': 'b4cae84757a1c3772f1f70a895d8a470'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+Explain the key concepts behind Vector database.,"Vector databases store and retrieve data embeddings as vectors in high-dimensional space, enabling semantic and similarity-based searches using approximate nearest neighbor algorithms. They support applications like semantic search, recommendations, multi-modal search, object detection, and retrieval-augmented generation by representing diverse data types (text, images, audio) as vectors where similar items are close in vector space.","A vector database, vector store or vector search engine is a database that stores and retrieves embeddings of data in vector space. Vector databases typically implement approximate nearest neighbor algorithms so users can search for records semantically similar to a given input, unlike traditional d","[Source: Vector database]
+A vector database, vector store or vector search engine is a database that stores and retrieves embeddings of data in vector space. Vector databases typically implement approximate nearest neighbor algorithms so users can search for records semantically similar to a given input, unlike traditional databases which primarily look up records by exact match
+
+---
+
+[Source: Vector database]
+. Use-cases for vector databases include similarity search, semantic search, multi-modal search, recommendations engines, object detection, and retrieval-augmented generation (RAG).
+
+---
+
+[Source: Vector database]
+Vector embeddings are mathematical representations of data in a high-dimensional space. In this space, each dimension corresponds to a feature of the data, with the number of dimensions ranging from a few hundred to tens of thousands, depending on the complexity of the data being represented. Each data item is represented by one vector in this space. Words, phrases, or entire documents, as well as images, audio, and other types of data, can all be vectorized.
+
+---
+
+[Source: Retrieval-augmented generation]
+=== Retriever-centric methods ===
+These methods aim to enhance the quality of document retrieval in vector databases:
+
+---
+
+[Source: Vector database]
+== Applications ==
+Vector databases are used in a wide range of machine learning applications including similarity search, semantic search, multi-modal search, recommendations engines, object detection, and retrieval-augmented generation.
+
+
+=== Retrieval-augmented generation ===",9d36f83db46a957a5ba9a66c4754fdd1,1271.9,"[""doc_27"", ""doc_22""]","[""doc_27""]",0.4661,ai_ml,Vector database,"['doc_27', 'doc_22']",['doc_27'],1.0,1.0,0.5,0.17391304347826086,1.0,1.0,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '8dadd58787f17a8bc7ac140c22087995'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'b3b35cb738d6e3132751587dbb2eb885'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': '5855e94dbed84f91d2a46bc13482a93e'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+What is the significance of Word embedding in artificial intelligence?,"Word embeddings are significant in artificial intelligence as they provide a meaningful, real-valued vector representation of words that captures semantic similarity, enabling improved performance in natural language processing tasks. They form the foundation for many modern AI applications in text analysis, though they can also encode and amplify societal biases present in training data.","In natural language processing, a word embedding is a representation of a word. The embedding is used in text analysis. Typically, the representation is a real-valued vector that encodes the meaning of the word in such a way that the words that are closer in the vector space are expected to be simil","[Source: Word embedding]
+In natural language processing, a word embedding is a representation of a word. The embedding is used in text analysis. Typically, the representation is a real-valued vector that encodes the meaning of the word in such a way that the words that are closer in the vector space are expected to be similar in meaning. Word embeddings can be obtained using language modeling and feature learning techniques, where words or phrases from the vocabulary are mapped to vectors of real numbers.
+
+---
+
+[Source: Word embedding]
+. Most new word embedding techniques after about 2005 rely on a neural network architecture instead of more probabilistic and algebraic models, after foundational work done by Yoshua Bengio and colleagues.
+
+---
+
+[Source: Word embedding]
+Word embeddings come in two different styles, one in which words are expressed as vectors of co-occurring words, and another in which words are expressed as vectors of linguistic contexts in which the words occur; these different styles are studied in Lavelli et al., 2004. Roweis and Saul published in Science how to use ""locally linear embedding"" (LLE) to discover representations of high dimensional data structures
+
+---
+
+[Source: Word embedding]
+Word embeddings may contain the biases and stereotypes contained in the trained dataset, as Bolukbasi et al
+
+---
+
+[Source: Word embedding]
+Research done by Jieyu Zhou et al. shows that the applications of these trained word embeddings without careful oversight likely perpetuates existing bias in society, which is introduced through unaltered training data. Furthermore, word embeddings can even amplify these biases.",f030974bc1fe32ec5db233f0187c501d,1165.7,"[""doc_28""]","[""doc_28""]",0.5153,ai_ml,Word embedding,['doc_28'],['doc_28'],1.0,1.0,1.0,0.2,1.0,0.6,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'ff0438828a29ac79e54a1db7f108842d'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '05477de7b0958d2141c97003e0a4c9a7'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': '9ea55a6c70703cda225f448f37dc4255'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+What is the significance of BERT (language model) in artificial intelligence?,"BERT is significant in artificial intelligence for advancing natural language processing through deep bidirectional context understanding, enabling state-of-the-art performance on diverse tasks like text classification, question answering, and language generation after fine-tuning. Its pre-training approach has also spurred research in model interpretability, known as ""BERTology.""",Bidirectional encoder representations from transformers (BERT) is a language model introduced in October 2018 by researchers at Google. It learns to represent text as a sequence of vectors using self-supervised learning. It uses the encoder-only transformer architecture.,"[Source: BERT (language model)]
+BERT was originally published by Google researchers Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. The design has its origins from pre-training contextual representations, including semi-supervised sequence learning, generative pre-training, ELMo, and ULMFit. Unlike previous models, BERT is a deeply bidirectional, unsupervised language representation, pre-trained using only a plain text corpus
+
+---
+
+[Source: BERT (language model)]
+BERT is meant as a general pretrained model for various applications in natural language processing. That is, after pre-training, BERT can be fine-tuned with fewer resources on smaller datasets to optimize its performance on specific tasks such as natural language inference and text classification, and sequence-to-sequence-based language generation tasks such as question answering and conversational response generation.
+
+---
+
+[Source: BERT (language model)]
+Language models like ELMo, GPT-2, and BERT, spawned the study of ""BERTology"", which attempts to interpret what is learned by these models. Their performance on these natural language understanding tasks are not yet well understood
+
+---
+
+[Source: BERT (language model)]
+The high performance of the BERT model could also be attributed to the fact that it is bidirectionally trained. This means that BERT, based on the Transformer model architecture, applies its self-attention mechanism to learn information from a text from the left and right side during training, and consequently gains a deep understanding of the context. For example, the word fine can have two different meanings depending on the context (I feel fine today, She has fine blond hair)
+
+---
+
+[Source: BERT (language model)]
+. Several research publications in 2018 and 2019 focused on investigating the relationship behind BERT's output as a result of carefully chosen input sequences, analysis of internal vector representations through probing classifiers, and the relationships represented by attention weights.",e82b083941691b0850988f7bf3385356,1159.5,"[""doc_1""]","[""doc_1""]",0.6301,ai_ml,BERT (language model),['doc_1'],['doc_1'],1.0,1.0,1.0,0.1,1.0,0.8,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '49d556f0283caae1e98c059c5c3521f0'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '8f756f1b3c6adbb2d8af334fa9619820'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.9, 'metadata': {'trace_id': '1fe3552d170fee952077d443c194bc1b'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.9
+What is GPT-4 and how does it work?,"PT series, capable of generating human-like text based on input prompts. It was trained in two stages using vast internet text datasets to predict the next token, enabling it to understand and generate natural language. GPT-4 can process both text and, in the case of GPT-4V, images. However, it may hallucinate (generate incorrect or fabricated information) and lacks transparency in its decision-making, as its post-hoc explanations of reasoning are not verifiable and can contradict prior outputs.",Generative Pre-trained Transformer 4 (GPT-4) is a large language model developed by OpenAI and the fourth in its series of GPT foundation models. GPT-4 is preceded by GPT-3.5 and followed by its successor GPT-5. GPT-4V is a version of GPT-4 that can process images in addition to text.,"[Source: GPT-4]
+== Limitations ==
+Like its predecessors, GPT-4 has been known to hallucinate, meaning that the outputs may include information not in the training data or that contradicts the user's prompt.
+
+---
+
+[Source: GPT-4]
+GPT-4 was trained in two stages. First, the model was given large datasets of text taken from the internet and trained to predict the next token (roughly corresponding to a word) in those datasets
+
+---
+
+[Source: GPT-4]
+Generative Pre-trained Transformer 4 (GPT-4) is a large language model developed by OpenAI and the fourth in its series of GPT foundation models.  
+GPT-4 is preceded by GPT-3.5 and followed by its successor GPT-5. GPT-4V is a version of GPT-4 that can process images in addition to text. OpenAI has not revealed technical details and statistics about GPT-4, such as the precise size of the model.
+
+---
+
+[Source: GPT-4]
+GPT-4 also lacks transparency in its decision-making processes. If requested, the model is able to provide an explanation as to how and why it makes its decisions but these explanations are formed post-hoc; it's impossible to verify if those explanations truly reflect the actual process. In many cases, when asked to explain its logic, GPT-4 will give explanations that directly contradict its previous statements.
+
+---
+
+[Source: Transformer (deep learning)]
+~
+              
+            
+          
+          
+            3
+          
+        
+        ,
+        
+          
+            
+              
+                x
+                ~
+              
+            
+          
+          
+            4
+          
+        
+      
+    
+    {\displaystyle {\tilde {x}}_{3},{\tilde {x}}_{4}}
+  
+ are discarded, and GPT-3 is run on those. This would take 
+  
+    
+      
+        4
+        
+          T
+          
+            GPT-3-small",b5e67e4267fb5d840bd4de9788853357,2054.6,"[""doc_11"", ""doc_25""]","[""doc_11""]",0.5762,ai_ml,GPT-4,"['doc_11', 'doc_25']",['doc_11'],1.0,1.0,0.5,0.10112359550561797,1.0,0.8,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'a7222fc427daddd4f18dfbbcda22b2ee'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '88286a8291063112b6824ec2c860b44f'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.85, 'metadata': {'trace_id': '491fd8e4adde39e3615ce351ba995acc'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.85
+What is Fine-tuning (deep learning) and how does it work?,"rning is a transfer learning technique where a pre-trained model is further trained on a specific task (downstream task) using additional data. It works by adjusting the model’s parameters—either all or a subset—through supervised or weak supervision, often using methods like reinforcement learning from human feedback (RLHF). In some approaches, such as Representation Fine-Tuning (ReFT), instead of updating weights, the model’s internal representations are modified to adapt behavior efficiently.","Fine-tuning (in deep learning) is the process of adapting a model trained for one task (the upstream task) to perform a different, usually more specific, task (the downstream task). It is considered a form of transfer learning, as it reuses knowledge learned from the original training objective. Fin","[Source: Fine-tuning (deep learning)]
+Fine-tuning (in deep learning) is the process of adapting a model trained for one task (the upstream task) to perform a different, usually more specific, task (the downstream task). It is considered a form of transfer learning, as it reuses knowledge learned from the original training objective.
+
+---
+
+[Source: Fine-tuning (deep learning)]
+Fine-tuning involves applying additional training (e.g., on new data) to the parameters of a neural network that have been pre-trained. Many variants exist.  The additional training can be applied to the entire neural network, or to only a subset of its layers, in which case the layers that are not being fine-tuned are ""frozen"" (i.e., not changed during backpropagation)
+
+---
+
+[Source: Fine-tuning (deep learning)]
+Fine-tuning is typically accomplished via supervised learning, but there are also techniques to fine-tune a model using weak supervision. Fine-tuning can be combined with a reinforcement learning from human feedback-based objective to produce language models such as ChatGPT (a fine-tuned version of GPT models) and Sparrow.
+
+---
+
+[Source: Large language model]
+=== Fine-tuning ===
+Before being fine-tuned, most LLMs are next-token predictors. The fine-tuning shapes the LLM's behavior via techniques like reinforcement learning from human feedback (RLHF) or constitutional AI.
+Instruction fine-tuning is a form of supervised learning used to teach LLMs to follow user instructions. In 2022, OpenAI demonstrated InstructGPT, a version of GPT-3 similarly fine-tuned to follow instructions.
+
+---
+
+[Source: Fine-tuning (deep learning)]
+Representation fine-tuning (ReFT) is a technique developed by researchers at Stanford University aimed at fine-tuning large language models (LLMs) by modifying less than 1% of their representations. Unlike parameter-efficient fine-tuning (PEFT) methods, which mainly focus on updating weights, ReFT targets representations, suggesting that modifying representations might be a more effective strategy than updating weights.",fb3020a4eedced697fbd51bacf4f472c,1769.8,"[""doc_9"", ""doc_14""]","[""doc_9""]",0.3178,ai_ml,Fine-tuning (deep learning),"['doc_9', 'doc_14']",['doc_9'],1.0,1.0,0.5,0.15294117647058825,1.0,1.0,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'b04fa2b699252bc7b76e0db8ecc68d2f'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'f72050d0b0a28f257453c40fb48f5fde'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': '26c2bf5efe6043a8e141c7115f81c8d6'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+Explain the key concepts behind Hallucination (artificial intelligence).,"that contains false or misleading information presented as fact. Unlike human hallucinations, which involve false perceptions, AI hallucinations are typically errors in reasoning or generation, such as confabulation or fabrication. These can occur across various modalities (e.g., text, image) when an AI produces a confident but incorrect output. The term is used inconsistently in research, with alternatives like ""confabulation,"" ""fabrication,"" or ""factual error"" also appearing in the literature.","In the field of artificial intelligence (AI), a hallucination or artificial hallucination (also called bullshitting, confabulation, or delusion) is a response generated by AI that contains false or misleading information presented as fact. This term draws a loose analogy with human psychology, where","[Source: Hallucination (artificial intelligence)]
+In the field of artificial intelligence (AI), a hallucination or artificial hallucination (also called bullshitting, confabulation, or delusion) is a response generated by AI that contains false or misleading information presented as fact. This term draws a loose analogy with human psychology, where a hallucination typically involves false percepts
+
+---
+
+[Source: Hallucination (artificial intelligence)]
+. However, there is a key difference: AI hallucination is associated with erroneously constructed responses (confabulation), rather than perceptual experiences.
+
+---
+
+[Source: Hallucination (artificial intelligence)]
+== In other modalities ==
+
+The concept of ""hallucination"" is not limited to text generation, and can occur with other modalities. A confident response from any AI that seems erroneous by the training data can be labeled a hallucination.
+
+---
+
+[Source: Hallucination (artificial intelligence)]
+Some researchers have highlighted a lack of consistency in how the term is used, but also identified several alternative terms in the literature, such as confabulations, fabrications, and factual errors.
+In 2023, the Cambridge dictionary updated its definition of hallucination to include this new sense specific to the field of AI.
+
+---
+
+[Source: Hallucination (artificial intelligence)]
+==== Hallucination from data ====",1b29c8f3b5522a21db82e5503834a6b7,1932.5,"[""doc_12""]","[""doc_12""]",0.5434,ai_ml,Hallucination (artificial intelligence),['doc_12'],['doc_12'],1.0,1.0,1.0,0.20512820512820512,1.0,0.6,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '11ce99416a8d9ebc7a163840cb0124cf'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '1ed1e51277338f203520baaabf6af04c'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': 'cdc8f9669b9220203bca2161c917007a'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+Describe the key events and significance of World War II.,"the Sudetenland. The war itself, lasting from 1 September 1939 to 2 September 1945, involved nearly all world nations, pitting the Allies against the Axis powers. Tanks and aircraft were pivotal, with strategic bombing and the use of nuclear weapons marking major developments. World War II was the deadliest conflict in history, resulting in 60 to 75 million deaths. Its significance lies in its global scale, unprecedented destruction, and lasting impact on international relations and world order.","World War II, or the Second World War (1 September 1939 – 2 September 1945), was a global conflict between two coalitions: the Allies and the Axis powers. Nearly all of the world's countries participated. Tanks and aircraft played major roles, the latter enabling the strategic bombing of cities and ","[Source: World War II]
+World War II, or the Second World War (1 September 1939 – 2 September 1945), was a global conflict between two coalitions: the Allies and the Axis powers. Nearly all of the world's countries participated. Tanks and aircraft played major roles, the latter enabling the strategic bombing of cities and delivery of the only nuclear weapons used in war. World War II was the deadliest conflict in history, causing the death of 60 to 75 million people
+
+---
+
+[Source: World War II]
+== See also ==
+Greatest Generation – Cohort born from 1901 to 1927
+Opposition to World War II
+Lists of World War II topics
+World War III – Hypothetical future global conflict
+
+
+== Notes ==
+
+
+== References ==
+
+
+=== Sources ===
+
+---
+
+[Source: British Empire]
+=== Second World War ===
+
+---
+
+[Source: World War II]
+The causes of World War II included unresolved tensions in the aftermath of World War I, and the rise of fascism in Europe and militarism in Japan. Key events preceding the war included Japan's invasion of Manchuria in 1931, the Spanish Civil War, the outbreak of the Second Sino-Japanese War in 1937, and Germany's annexations of Austria and the Sudetenland
+
+---
+
+[Source: World War II]
+. The British historian Antony Beevor views the beginning of World War II as the Battles of Khalkhin Gol fought between Japan and the forces of Mongolia and the Soviet Union from May to September 1939. Others view the Spanish Civil War as the start or prelude to World War II.",410aa437942d702aa2d049bff320cc7f,2671.1,"[""doc_29"", ""doc_3""]","[""doc_29""]",0.6455,history,World War II,"['doc_29', 'doc_3']",['doc_29'],1.0,1.0,0.5,0.2702702702702703,1.0,0.6,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '740026642150ad314e7545cfcac5b30c'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'adbca6d745d311b2e4c0b059cead864e'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.85, 'metadata': {'trace_id': '763712f7d0d8cca6883bb203627dd593'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.85
+What was French Revolution and what were its main causes and consequences?,"l freedoms, and established principles of equality and democracy. Its main causes were social inequality, political absolutism, and economic crisis, which the existing regime failed to address. Key consequences included the rise of French nationalism, the spread of democratic ideals across Europe, the transformation of French society and politics, and long-term political polarization. The revolution also laid the foundation for modern liberal democracy and influenced political thought worldwide.","The French Revolution was a period of political and societal change in France that began with the Estates General of 1789 and ended with the Coup of 18 Brumaire on 9 November 1799. Many of the revolution's ideas are considered fundamental principles of liberal democracy, and its values remain centra","[Source: French Revolution]
+The French Revolution had a major impact on western history by ending feudalism in France and creating a path for advances in individual freedoms throughout Europe. The revolution represented the most significant challenge to political absolutism up to that point in history and spread democratic ideals throughout Europe and ultimately the world. Its impact on French nationalism was profound, while also stimulating nationalist movements throughout Europe
+
+---
+
+[Source: French Revolution]
+The French Revolution was a period of political and societal change in France that began with the Estates General of 1789 and ended with the Coup of 18 Brumaire on 9 November 1799. Many of the revolution's ideas are considered fundamental principles of liberal democracy, and its values remain central to modern French political discourse. It was caused by a combination of social, political, and economic factors which the existing regime proved unable to manage.
+
+---
+
+[Source: French Revolution]
+The long-term impact on France was profound, shaping politics, society, religion and ideas, and polarising politics for more than a century. Historian François Aulard writes:""From the social point of view, the Revolution consisted in the suppression of what was called the feudal system, in the emancipation of the individual, in greater division of landed property, the abolition of the privileges of noble birth, the establishment of equality, the simplification of life...
+
+---
+
+[Source: Age of Enlightenment]
+==== American Revolution and French Revolution ====
+
+---
+
+[Source: French Revolution]
+. His major work, The French Revolution, a Political History, 1789–1804 (1905), was a democratic and republican interpretation of the Revolution.",1d2475dc5ebc4a0a16be386a6715374c,2020.5,"[""doc_10"", ""doc_0""]","[""doc_10""]",0.5158,history,French Revolution,"['doc_10', 'doc_0']",['doc_10'],1.0,1.0,0.5,0.1125,1.0,1.0,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'd0b54f1212bab0a4134c7e702ecda464'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'e9b3697ef9b5b16f712d25db7a84a4b2'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.9, 'metadata': {'trace_id': '88a9a8a7baec998ed88820b51fbadc66'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.9
+What was Roman Empire and what were its main causes and consequences?," Augustus, the establishment of the Principate, and the expansion of Roman citizenship under Caracalla in 212 AD. The empire's stability was supported by cooperation with local elites and military strength. Consequences include the Pax Romana—a period of peace and prosperity—followed by the Crisis of the Third Century marked by civil war, invasions, plague, and economic collapse, leading to the empire's division into Western and Eastern halves and the transition from classical to late antiquity.","The Roman Empire was a state that controlled the Mediterranean and much of Western Europe, Western Asia, and North Africa during the classical period. The Roman Republic had previously conquered most of these territories, which became ruled by emperors following triumvir Octavian's rise to power and","[Source: Roman Empire]
+The Roman Empire was a state that controlled the Mediterranean and much of Western Europe, Western Asia, and North Africa during the classical period. The Roman Republic had previously conquered most of these territories, which became ruled by emperors following triumvir Octavian's rise to power and establishment of a Principate regime in 27 BC.  By the 4th century AD the empire split into western and eastern halves
+
+---
+
+[Source: Roman Empire]
+The first two centuries of the Empire saw a period of unprecedented stability and prosperity known as the Pax Romana (lit. 'Roman Peace'). Rome reached its greatest territorial extent under Trajan (r. 98–117 AD), but a period of increasing trouble and decline began under Commodus (r. 180–192). In the 3rd century, the Empire underwent a 49-year crisis that threatened its existence due to civil war, plagues and barbarian invasions
+
+---
+
+[Source: Roman Empire]
+The 200 years that began with Augustus's rule are traditionally regarded as the Pax Romana (""Roman Peace""). The cohesion of the empire was furthered by a degree of social stability and economic prosperity that Rome had never before experienced. Uprisings in the provinces were infrequent and put down ""mercilessly and swiftly"". The success of Augustus in establishing principles of dynastic succession was limited by his outliving a number of talented potential heirs
+
+---
+
+[Source: Roman Empire]
+. Cooperation with local elites was necessary to maintain order, collect information, and extract revenue. The Romans often exploited internal political divisions.
+
+---
+
+[Source: Roman Empire]
+In 212, during the reign of Caracalla, Roman citizenship was granted to all freeborn inhabitants of the empire. The Severan dynasty was tumultuous; an emperor's reign was ended routinely by his murder or execution and, following its collapse, the Empire was engulfed by the Crisis of the Third Century, a period of invasions, civil strife, economic disorder, and plague. In defining historical epochs, this crisis sometimes marks the transition from classical to late antiquity",7f7adbcb98f028788205e8700fa63bce,2660.3,"[""doc_23""]","[""doc_23""]",0.7008,history,Roman Empire,['doc_23'],['doc_23'],1.0,1.0,1.0,0.10975609756097561,1.0,0.8,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'aa096d100e1d346cae1025a416deaa84'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '33ee214e339c4ef293a95d5f8f22b85e'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': 'ece6971ed48129b18417c07bf4bb03af'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+What was Byzantine Empire and what were its main causes and consequences?,"e centered on Constantinople, surviving after the fall of the Western Roman Empire and enduring until 1453. It blended Roman, Greek, and Christian traditions, preserving European civilization by defending against steppe peoples. Its main causes included the survival of Roman administrative structures and the strategic location of Constantinople. Key consequences were the preservation of classical knowledge, the spread of Orthodox Christianity, and the eventual fall to the Ottoman Empire in 1453.","The Byzantine Empire, also known as the Eastern Roman Empire, was the continuation of the Roman Empire centred on Constantinople during late antiquity and the Middle Ages. Having survived the events that caused the fall of the Western Roman Empire in the 5th century AD, it endured until the fall of ","[Source: Byzantine Empire]
+Byzantine strategy was primarily defensive, aside from the brief period of aggression between the ninth and eleventh centuries, because of the empire's habitual lack of resources. To avoid risky and expensive military campaigns, the Byzantines engaged in extensive diplomatic efforts. These took various forms, including: formal embassies, client management, alliance or peace negotiations, political marriages, propaganda and bribery, or even espionage and assassination.
+
+---
+
+[Source: Byzantine Empire]
+The Byzantine Empire distinctively blended Roman political traditions, Greek literary heritage, and Christianity, creating the civilisational framework that laid the foundation for medieval Europe. The Empire preserved European civilisation by acting as a shield against forces from Eurasian Steppe people such as the Avars, Bulgars, Cumans, Huns, Pechenegs, and Turks.
+
+---
+
+[Source: Byzantine Empire]
+The Byzantine Empire reached its greatest extent under the reign of Justinian I (r. 527–565), who briefly reconquered much of Italy and the western Mediterranean coast. A plague began around 541, and a prolonged warfare with Persia placed fiscal and military strain on the empire, contributing to political and strategic challenges in the decades that followed
+
+---
+
+[Source: Byzantine Empire]
+The Byzantine Empire, also known as the Eastern Roman Empire, was the continuation of the Roman Empire centred on Constantinople during late antiquity and the Middle Ages. Having survived the events that caused the fall of the Western Roman Empire in the 5th century AD, it endured until the fall of Constantinople to the Ottoman Empire in 1453. The term 'Byzantine Empire' was coined only after its demise; its citizens used the term 'Roman Empire' and called themselves 'Romans'.
+
+---
+
+[Source: Byzantine Empire]
+== See also ==
+List of Byzantine emperors
+Byzantine dress
+Family tree of Byzantine emperors
+List of Byzantine revolts and civil wars
+List of Byzantine wars
+List of Roman dynasties
+Outline of the Byzantine Empire
+
+
+== References ==
+
+
+=== Notes ===
+
+
+=== Citations ===
+
+
+== Bibliography ==
+
+
+=== Books ===
+
+
+=== Journals ===
+
+
+=== Book chapters and encyclopaedias ===
+
+
+== Further reading ==",00ffb09599d152bb3a15115c42883bc3,1802.3,"[""doc_4""]","[""doc_4""]",0.6312,history,Byzantine Empire,['doc_4'],['doc_4'],1.0,1.0,1.0,0.14473684210526316,1.0,0.4,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'dd33a995a285c65758e161f4530ca791'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'c8225e93a8e62e344b5fbf5009fd99c4'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': '33b188ceddbdaf103eaf2123b73b37c8'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+Describe the key events and significance of Mongol Empire.,"hing from the Sea of Japan to Eastern Europe, and encompassing regions across Siberia, the Indian subcontinent, the Iranian plateau, and the Levant. Its key events include the unification of Mongol tribes under Genghis Khan in 1206, followed by extensive military conquests that established a vast empire. The empire's significance lies in its unprecedented size, facilitation of trade and cultural exchange along the Silk Road, and lasting impact on the political and cultural landscapes of Eurasia.","The Mongol Empire was the largest contiguous empire in history. Originating in present-day Mongolia in East Asia, the medieval empire at its height stretched from the Sea of Japan to Eastern Europe, extending northward into Siberia and east and southward into the Indian subcontinent, mounting invasi","[Source: Mongol Empire]
+== United Mongol Empire (1206–60) ==
+
+
+=== Early organization ===
+
+---
+
+[Source: Mongol Empire]
+== See also ==
+Outline of the Mongol Empire
+Mongol dynasty (disambiguation)
+Mongol khanate (disambiguation)
+List of medieval Mongol tribes and clans
+List of Mongol states
+
+
+== References ==
+
+
+=== Notes ===
+
+
+=== Citations ===
+
+
+=== Sources ===
+
+
+== Further reading ==
+
+
+=== General surveys ===
+
+
+== External links ==
+The Mongols in World History
+The Mongol Empire for students Archived 27 November 2020 at the Wayback Machine
+William of Rubruck's Account of the Mongols
+
+---
+
+[Source: Mongol Empire]
+=== Mongol Civil War ===
+
+---
+
+[Source: Mongol Empire]
+=== Rump states of the Mongol Empire ===
+
+---
+
+[Source: Mongol Empire]
+The Mongol Empire was the largest contiguous empire in history. Originating in present-day Mongolia in East Asia, the medieval empire at its height stretched from the Sea of Japan to Eastern Europe, extending northward into Siberia and east and southward into the Indian subcontinent, mounting invasions of Southeast Asia, and conquering the Iranian plateau; and reaching westward as far as the Levant and the Carpathian Mountains.",341a2d828ff2de2fb2b079e16ae9e88d,2083.3,"[""doc_15""]","[""doc_15""]",0.4796,history,Mongol Empire,['doc_15'],['doc_15'],1.0,1.0,1.0,0.17721518987341772,1.0,0.8,"{'name': 'hallucination', 'score': 0.0, 'label': 'HALLUCINATED', 'metadata': {'trace_id': '1ca46c2626d0dd933a220469e5ab83ab'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'dea3c304fe5ec2512338cd07b8d75164'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': 'bc70c62de1223407a59bf287c7ce34b9'}, 'kind': 'llm', 'direction': 'maximize'}",HALLUCINATED,0.0,HIGH,1.0,0.95
+What role did Industrial Revolution play in shaping the modern world?,"The Industrial Revolution shaped the modern world by driving sustained economic growth, increasing average income and population, improving living standards in the Western world, and spreading technological and industrial advancements globally. It transformed manufacturing, transportation, and consumer culture, laying the foundation for modern industrial societies.","The Industrial Revolution, sometimes called the First Industrial Revolution in contrast to the subsequent Second Industrial Revolution, was a transitional period of the global economy toward more widespread, efficient and stable manufacturing processes, succeeding the Second Agricultural Revolution.","[Source: Industrial Revolution]
+. An entrepreneurial spirit and consumer revolution helped drive industrialisation.
+
+---
+
+[Source: British Empire]
+In the 19th century, innovation in Britain led to revolutionary changes in manufacturing, the development of factory systems, and the growth of transportation by railway and steamship. Debate has occurred as to what extent the Industrial Revolution, originating from the United Kingdom, was facilitated by or dependent on imperialism
+
+---
+
+[Source: Industrial Revolution]
+The Industrial Revolution influenced almost every aspect of life. In particular, average income and population began to exhibit unprecedented sustained growth. Economists note the most important effect was that the standard of living for most in the Western world began to increase consistently for the first time, though others have said it did not begin to improve meaningfully until the 20th century
+
+---
+
+[Source: Industrial Revolution]
+Economic historians such as Mendels, Pomeranz, and Kridte argue proto-industrialisation in parts of Europe, the Islamic world, Mughal India, and China created the social and economic conditions that led to the Industrial Revolution, thus causing the Great Divergence. Some historians, such as John Clapham and Nicholas Crafts, have argued that the economic and social changes occurred gradually and that revolution is a misnomer.
+
+---
+
+[Source: Industrial Revolution]
+There were two main values that drove the Industrial Revolution in Britain: self-interest and entrepreneurial spirit. Because of these, many advances were made that resulted in a huge increase in personal wealth and a consumer revolution. These advancements benefitted British society as a whole. Countries recognised the advancements and used them to begin their own revolutions.",fe6bff30a14ad3e57461b964cebe84bb,982.0,"[""doc_13"", ""doc_3""]","[""doc_13""]",0.6818,history,Industrial Revolution,"['doc_13', 'doc_3']",['doc_13'],1.0,1.0,0.5,0.08333333333333333,1.0,0.6,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '38f0976a9c5527177b50d6fe8ae067df'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '848668c81a8e4829ebcc6cb2b00293d0'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.9, 'metadata': {'trace_id': '40ea413db0698582d18073b1959d2a7f'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.9
+What role did Cold War play in shaping the modern world?,"The Cold War shaped the modern world by establishing a global bipolar order that influenced decolonization, spurred technological and ideological rivalries like the Space Race, drove domestic progressive reforms in the U.S. through bipartisan support, and turned many newly independent nations into battlegrounds for influence, while promoting economic aid and regime change to secure alliances.","The Cold War was a period of international geopolitical rivalry between the United States (US) and the Soviet Union (USSR) and their respective allies, the capitalist Western Bloc and communist Eastern Bloc. It began in the aftermath of the Second World War and ended with the dissolution of the Sovi","[Source: World War II]
+. The Soviet Union and the US emerged as rival superpowers, setting the stage for the Cold War. In the wake of Europe's devastation, the influence of its great powers waned, triggering the decolonisation of Africa and of Asia. Many countries whose industries had been damaged moved towards economic recovery and expansion.
+
+---
+
+[Source: Cold War]
+It has become a staple of twentieth-century historiography that Cold War concerns were at the root of a number of progressive political accomplishments in the postwar period: a high progressive marginal tax rate that helped fund the arms race and contributed to broad income equality; bipartisan support for far-reaching civil rights legislation that transformed politics and society in the American South, which had long given the lie to America's egalitarian ethos; bipartisan support for
+
+---
+
+[Source: Cold War]
+. In addition to the struggle for ideological and economic influence and an arms race in both conventional and nuclear weapons, the Cold War was expressed through technological rivalries such as the Space Race, espionage, propaganda campaigns, embargoes, and sports diplomacy.
+
+---
+
+[Source: Cold War]
+In the course of the 1960s and 1970s, Cold War participants struggled to adjust to a new, more complicated pattern of international relations in which the world was no longer divided into two clearly opposed blocs
+
+---
+
+[Source: Cold War]
+US involvement in regime change during the Cold War included support for First World anti-communist and right-wing dictatorships and uprisings, while Soviet involvement included the funding of Second World left-wing parties, wars of independence, and dictatorships. As nearly all the colonial states underwent decolonization, many became Third World battlefields of the Cold War. Both powers used economic aid in an attempt to win the loyalty of non-aligned countries",630a97bbeb6fc74d33edd3de21ca9641,1182.9,"[""doc_29"", ""doc_7""]","[""doc_7""]",0.6765,history,Cold War,"['doc_29', 'doc_7']",['doc_7'],1.0,0.5,0.5,0.0759493670886076,1.0,0.8,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'f5bfe11de82e83eeda71741224ab7fcd'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'fdca0aba907686f51f95d6195542ae5a'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.85, 'metadata': {'trace_id': '4621c276e72642e8f99ef71f9220df8b'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.85
+What role did Renaissance play in shaping the modern world?,"The Renaissance shaped the modern world by bridging the Middle Ages and modernity through the revival of classical antiquity, promoting humanist thought, advancing realism in art, fostering scientific observation and inductive reasoning, and contributing to the development of diplomacy and the ideal of the polymath ""Renaissance man.""","The Renaissance (UK:  rin-AY-sənss, US:   REN-ə-sahnss) is a European period of history and cultural movement, very roughly defined as covering the 14th through 17th centuries, though sometimes more narrowly defined for instance as only covering the 15th through 16th centuries. It marked the transit","[Source: Renaissance]
+== Overview ==
+The Renaissance was a cultural movement that profoundly affected European intellectual life in the early modern period. Beginning in Italy, and spreading to the rest of Europe by the 16th century, its influence was felt in art, architecture, philosophy, literature, music, science, technology, politics, religion, and other aspects of intellectual inquiry. Renaissance scholars employed the humanist method in study, and searched for realism and human emotion in art.
+
+---
+
+[Source: Renaissance]
+== Other Renaissances ==
+
+---
+
+[Source: Renaissance]
+The Renaissance (UK:  rin-AY-sənss, US:   REN-ə-sahnss) is a European period of history and cultural movement, very roughly defined as covering the 14th through 17th centuries, though sometimes more narrowly defined for instance as only covering the 15th through 16th centuries. It marked the transition from the Middle Ages to modernity and was characterized by the European rediscovery and revival of the literary, philosophical, and artistic achievements of classical antiquity
+
+---
+
+[Source: Renaissance]
+In all, the Renaissance can be viewed as an attempt by intellectuals to study and improve the secular and worldly, both through the revival of ideas from antiquity and through novel approaches to thought
+
+---
+
+[Source: Renaissance]
+. It saw myriad artistic developments and contributions from such polymaths as Leonardo da Vinci and Michelangelo, who inspired the term ""Renaissance man"". In politics, the Renaissance contributed to the development of the customs and conventions of diplomacy, and in science to an increased reliance on observation and inductive reasoning",de718aff1b7d028ac9f77b10e13dba5a,1121.6,"[""doc_21""]","[""doc_21""]",0.6811,history,Renaissance,['doc_21'],['doc_21'],1.0,1.0,1.0,0.07462686567164178,1.0,0.8,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '7ab42896c81a3dc6d5beb0435cb74aa1'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'eeba6f66a84c4a2844cd33cc51242db8'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': '9d801028bd66434f7c889be40b43b1af'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+Describe the key events and significance of Age of Enlightenment.,"l liberty, religious tolerance, progress, natural rights, constitutional government, and the separation of church and state. Thinkers emphasized rational inquiry and challenged religious dogma, exemplified by Kant’s call to “dare to know.” The movement influenced political and social reform and spread from Western Europe to the Americas and Oceania. In the 1970s, scholarship expanded to include its global impact, particularly in European colonies and underrepresented regions like Eastern Europe.","The Age of Enlightenment, also known as the Age of Reason or simply the Enlightenment, was a period of intellectual and cultural flourishing in Europe and Western civilization, emerging in the late 17th century in Western Europe. It reached its peak in the 18th century as its ideas spread more widel","[Source: Age of Enlightenment]
+The Age of Enlightenment, also known as the Age of Reason or simply the Enlightenment, was a period of intellectual and cultural flourishing in Europe and Western civilization, emerging in the late 17th century in Western Europe. It reached its peak in the 18th century as its ideas spread more widely across Europe and into the European colonies in the Americas and Oceania
+
+---
+
+[Source: Age of Enlightenment]
+. Characterized by an emphasis on reason, empirical evidence, and the scientific method, the Enlightenment promoted ideals of individual liberty, religious tolerance, progress, and natural rights. Its thinkers advocated for constitutional government, the separation of church and state, and the application of rational principles to social and political reform.
+
+---
+
+[Source: Age of Enlightenment]
+=== Citations ===
+
+
+=== Sources ===
+
+
+== Further reading ==
+
+
+=== Reference and surveys ===
+
+
+=== Specialty studies ===
+
+
+=== Primary sources ===
+
+
+== External links ==
+
+Zalta, Edward N. (ed.). ""Enlightenment"". Stanford Encyclopedia of Philosophy. ISSN 1095-5054. OCLC 429049174.
+Age of Enlightenment at PhilPapers
+Age of Enlightenment at the Indiana Philosophy Ontology Project
+Collection: Art of the Enlightenment Era from the University of Michigan Museum of Art
+
+---
+
+[Source: Age of Enlightenment]
+. The Enlightenment was marked by an increasing awareness of the relationship between the mind and the everyday media of the world, and by an emphasis on the scientific method and reductionism, along with increased questioning of religious dogma—an attitude captured by Kant's essay Answering the Question: What Is Enlightenment?, where the phrase sapere aude ('dare to know') can be found.
+
+---
+
+[Source: Age of Enlightenment]
+In the 1970s, study of the Enlightenment expanded to include the ways Enlightenment ideas spread to European colonies and how they interacted with indigenous cultures and how the Enlightenment took place in formerly unstudied areas such as Italy, Greece, the Balkans, Poland, Hungary, and Russia. Intellectuals such as Robert Darnton and Jürgen Habermas have focused on the social conditions of the Enlightenment",629e71f8c46db168c91b4da9b10a0f1d,2380.6,"[""doc_0""]","[""doc_0""]",0.3985,history,Age of Enlightenment,['doc_0'],['doc_0'],1.0,1.0,1.0,0.11392405063291139,1.0,0.6,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'c7af408d60cb3339bd5cc08d8117378b'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'fbdc9eb4b44877bfdb8d843a2bdfcb15'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.85, 'metadata': {'trace_id': '63d3f545d27180315f8297e26b3e26a8'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.85
+What was British Empire and what were its main causes and consequences?,"velopment of property rights, which fueled the Industrial Revolution and enabled imperial growth. Consequences included both significant economic and institutional development in some colonies, as argued by historians like Niall Ferguson, and devastating famines in India, as noted by scholars like Amartya Sen. The empire's decline began after World War I, as Britain lost its industrial and military dominance to rising powers like Germany and the United States, and the war strained its resources.","The British Empire comprised the dominions, colonies, protectorates, mandates, and other territories headed by the British monarchy. It began with the overseas possessions and trading posts established by England in the late 16th and early 17th centuries, and colonisation attempts by Scotland during","[Source: British Empire]
+The British Empire comprised the dominions, colonies, protectorates, mandates, and other territories headed by the British monarchy. It began with the overseas possessions and trading posts established by England in the late 16th and early 17th centuries, and colonisation attempts by Scotland during the 17th century. At its height in the 19th and early 20th centuries, it became the largest empire in history and, for a century, was the foremost global power
+
+---
+
+[Source: Industrial Revolution]
+Many technological and architectural innovations were British. By the mid-18th century, Britain was the leading commercial nation, controlled a global trading empire with colonies in North America and the Caribbean, and had military and political hegemony on the Indian subcontinent. The development of trade and rise of business were among the major causes of the Industrial Revolution. Developments in law facilitated the revolution, such as courts ruling in favour of property rights
+
+---
+
+[Source: British Empire]
+. Some scholars, including Amartya Sen, assert that British policies worsened the famines in India that killed millions during British rule. Conversely, historians such as Niall Ferguson calculate that the economic and institutional development the British Empire brought resulted in a net benefit to its colonies. Other historians treat its legacy as varied and ambiguous
+
+---
+
+[Source: British Empire]
+. Although the empire achieved its largest territorial extent immediately after the First World War, Britain was no longer the world's preeminent industrial or military power.
+
+---
+
+[Source: British Empire]
+. By the start of the 20th century, Germany and the United States had begun to challenge Britain's economic lead. Military, economic and colonial tensions between Britain and Germany were major causes of the First World War, during which Britain relied heavily on its empire. The conflict placed enormous strain on its military, financial, and manpower resources",ccec9fe17c8eea84ee833521d2c1ef8c,2580.8,"[""doc_3"", ""doc_13""]","[""doc_3""]",0.6296,history,British Empire,"['doc_3', 'doc_13']",['doc_3'],1.0,1.0,0.5,0.07142857142857142,1.0,0.8,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '721484a8752c132759105bc6bbcb6c4e'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'e3036990fff1de62708b9a68ba2bbf24'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.4, 'metadata': {'trace_id': 'd53838d7427b97f761c7178ad5224a41'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.4
+How does DNA work and what are its key applications?,"lynucleotide chains forming a double helix, with genetic information encoded in the sequence of nucleotides. DNA interacts with molecules to mediate genome function and provides the basis for heredity. Key applications include advancements in genetics, medicine (e.g., treating genetic disorders), agriculture (e.g., crop engineering), and research into life's fundamental processes, particularly through technologies like CRISPR that leverage DNA repair mechanisms for precise genetic modifications.","Deoxyribonucleic acid (; DNA) is a polymer composed of two polynucleotide chains that coil around each other to form a double helix. The polymer carries genetic instructions for the development, functioning, growth and reproduction of all known organisms and many viruses. DNA and ribonucleic acid (R","[Source: DNA]
+. The details of these functions are covered in other articles; here the focus is on the interactions between DNA and other molecules that mediate the function of the genome.
+
+---
+
+[Source: CRISPR]
+. It makes use of the cell's natural DNA repair systems, including non-homologous end joining, homology-directed repair, or mismatch repair, to modify, insert, or delete genetic material at these specific cut sites. This technology has transformed fields such as genetics, medicine, and agriculture, offering potential treatments for genetic disorders, advancements in crop engineering, and research into the fundamental workings of life
+
+---
+
+[Source: DNA]
+Deoxyribonucleic acid (; DNA) is a polymer composed of two polynucleotide chains that coil around each other to form a double helix. The polymer carries genetic instructions for the development, functioning, growth and reproduction of all known organisms and many viruses. DNA and ribonucleic acid (RNA) are nucleic acids
+
+---
+
+[Source: DNA]
+. This system provided the first clear suggestion that DNA carries genetic information.
+
+---
+
+[Source: DNA]
+DNA is a long polymer made from repeating units called nucleotides. The structure of DNA is dynamic along its length, being capable of coiling into tight loops and other shapes. In all species it is composed of two helical chains, bound to each other by hydrogen bonds. Both chains are coiled around the same axis, and have the same pitch of 34 ångströms (3.4 nm). The pair of chains have a radius of 10 Å (1.0 nm)",062058407960d14f58aa565395151a12,1861.0,"[""doc_8"", ""doc_5""]","[""doc_8""]",0.6219,science,DNA,"['doc_8', 'doc_5']",['doc_8'],1.0,1.0,0.5,0.12195121951219512,1.0,0.8,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'd5b1211116e98277445efc19b657f4dc'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '205de63e217ecbea0e4fa6e263aa86be'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.9, 'metadata': {'trace_id': '55e9d772b722b5bbf80cf6b7b2560d64'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.9
+Explain the fundamental principles of Quantum mechanics.,"d subatomic particles, and underpins fields like quantum chemistry, solid-state physics, and quantum technology. Quantum mechanics relies on advanced mathematics, including linear algebra, complex numbers, and differential equations. While it successfully describes small-scale systems, its application to macroscopic systems like humans raises philosophical questions, and its use in cosmology remains speculative. Classical physics emerges as an approximation of quantum mechanics at larger scales.","Quantum mechanics is the fundamental physical theory that describes the behavior of matter and of light; its unusual characteristics typically occur at and below the scale of atoms. It is the foundation of all quantum physics, which includes quantum chemistry, quantum biology, quantum field theory, ","[Source: Quantum mechanics]
+Quantum mechanics is the fundamental physical theory that describes the behavior of matter and of light; its unusual characteristics typically occur at and below the scale of atoms. It is the foundation of all quantum physics, which includes quantum chemistry, quantum biology, quantum field theory, quantum technology, and quantum information science.
+
+---
+
+[Source: Quantum mechanics]
+Quantum mechanics allows the calculation of properties and behaviour of physical systems. It is typically applied to microscopic systems: molecules, atoms and subatomic particles. It has been demonstrated to hold for complex molecules with thousands of atoms, but its application to human beings raises philosophical problems, such as Wigner's friend, and its application to the universe as a whole remains speculative
+
+---
+
+[Source: Quantum mechanics]
+Quantum mechanics has had enormous success in explaining many of the features of our universe, with regard to small-scale and discrete quantities and interactions which cannot be explained by classical methods. Quantum mechanics is often the only theory that can reveal the individual behaviors of the subatomic particles that make up all forms of matter (electrons, protons, neutrons, photons, and others). Solid-state physics and materials science are dependent upon quantum mechanics.
+
+---
+
+[Source: Quantum mechanics]
+It is not possible to present these concepts in more than a superficial way without introducing the mathematics involved; understanding quantum mechanics requires not only manipulating complex numbers, but also linear algebra, differential equations, group theory, and other more advanced subjects. Accordingly, this article will present a mathematical formulation of quantum mechanics and survey its application to some useful and oft-studied examples.
+
+---
+
+[Source: Quantum mechanics]
+Quantum mechanics can describe many systems that classical physics cannot. Classical physics can describe many aspects of nature at an ordinary (macroscopic and (optical) microscopic) scale, however is insufficient for describing them at very small submicroscopic (atomic and subatomic) scales. Classical mechanics can be derived from quantum mechanics as an approximation that is valid at ordinary scales.",9fd7bfc2fe698a608f63e3465561cf4a,2554.0,"[""doc_20""]","[""doc_20""]",0.614,science,Quantum mechanics,['doc_20'],['doc_20'],1.0,1.0,1.0,0.13157894736842105,1.0,1.0,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'a88c31f5d4f949871a1fa95a1066da6b'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'ba33d70e98897291574ac310289f5721'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': '7d684f00741c03d61d8d9c8c5d4d426e'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+What is Black hole and why is it important in science?,"A black hole is a region of spacetime with gravity so strong that nothing, not even light, can escape from it, defined by the presence of an event horizon. It is important in science because it tests the limits of general relativity, influences surrounding matter and light, and provides insights into extreme gravitational physics, spacetime structure, and the nature of information in the universe.","A black hole is an astronomical body so compact that its gravity prevents anything, including light, from escaping. Albert Einstein's theory of general relativity, which describes gravitation as the curvature of spacetime, predicts that any sufficiently compact mass will form a black hole. The bound","[Source: Black hole]
+A black hole is an astronomical body so compact that its gravity prevents anything, including light, from escaping. Albert Einstein's theory of general relativity, which describes gravitation as the curvature of spacetime, predicts that any sufficiently compact mass will form a black hole. The boundary of no escape is called the event horizon. In general relativity, crossing a black hole's event horizon traps an object inside but produces no locally detectable change
+
+---
+
+[Source: Black hole]
+The defining feature of a black hole is the existence of an event horizon, a boundary in spacetime through which matter and light can pass only inward towards the center of the black hole. Nothing, not even light, can escape from inside the event horizon. The event horizon is referred to as such because if an event occurs within the boundary, information from that event cannot reach or affect an outside observer, making it impossible to determine whether such an event occurred.
+
+---
+
+[Source: Black hole]
+== Structure ==
+While black holes are conceptually invisible sinks of all matter and light, in astronomical settings, their enormous gravity alters the motion of surrounding objects and pulls nearby gas inwards at near-light speed, making the area around black holes the brightest objects in the universe.
+
+
+=== External geometry ===
+
+
+==== Relativistic jets ====
+
+---
+
+[Source: Black hole]
+. There are several other definitions that can be used to describe or identify a black hole, although they are not universally agreed upon by physicists. Among astrophysicists, a black hole is a compact object with a mass larger than four solar masses. A black hole may also be defined as a reservoir of information or a region where space is falling inwards faster than the speed of light.
+
+---
+
+[Source: Black hole]
+A black hole is generally defined as a region of spacetime from which no information-carrying signals or objects can escape. However, verifying an object as a black hole by this definition would require waiting for an infinite time and at an infinite distance from the black hole to verify that indeed, nothing has escaped, and thus cannot be used to identify a physical black hole",464648a5e68bc875e450939127aaffe9,1408.2,"[""doc_2""]","[""doc_2""]",0.723,science,Black hole,['doc_2'],['doc_2'],1.0,1.0,1.0,0.17567567567567569,1.0,1.0,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '2e107970f24d392b35cdac853a67b3ca'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '858427a70544edfb6331e9d728af0ce1'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': '6bc606c8025d095ca959b3a124ab119f'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+What is CRISPR and why is it important in science?,"CRISPR is a family of DNA sequences in prokaryotic organisms that serve as part of an adaptive immune system, allowing bacteria and archaea to defend against invading viruses and bacteriophages by storing fragments of their DNA. It is important in science because it forms the basis of CRISPR-Cas9 gene editing technology, a revolutionary tool that enables precise, targeted modifications to the DNA of living organisms, transforming fields such as genetics, medicine, and biotechnology.",CRISPR (; acronym for clustered regularly interspaced short palindromic repeats) is a family of DNA sequences found in the genomes of prokaryotic organisms such as bacteria and archaea. Each sequence within an individual prokaryotic CRISPR is derived from a DNA fragment of a bacteriophage that had p,"[Source: CRISPR]
+=== CRISPR RNA structures ===
+
+---
+
+[Source: CRISPR]
+CRISPR (; acronym for clustered regularly interspaced short palindromic repeats) is a family of DNA sequences found in the genomes of prokaryotic organisms such as bacteria and archaea. Each sequence within an individual prokaryotic CRISPR is derived from a DNA fragment of a bacteriophage that had previously infected the prokaryote or one of its ancestors. These sequences are used to detect and destroy DNA from similar bacteriophages during subsequent infections
+
+---
+
+[Source: CRISPR]
+CRISPR gene editing is a revolutionary technology that allows for precise, targeted modifications to the DNA of living organisms. Developed from a natural defense mechanism found in bacteria, CRISPR-Cas9 is the most commonly used system. Gene editing with CRISPR-Cas9 involves a Cas9 nuclease and an engineered guide RNA, which come together to allow for the precise ""cutting"" of one or both strands of DNA at specific locations within the genome
+
+---
+
+[Source: CRISPR]
+== Mechanism ==
+
+CRISPR-Cas immunity is a natural process of bacteria and archaea. CRISPR-Cas prevents bacteriophage infection, conjugation and natural transformation by degrading foreign nucleic acids that enter the cell.
+
+---
+
+[Source: CRISPR]
+== History ==
+The CRISPR/Cas system evolved in nature as a means for bacteria to protect themselves from invading viruses and bacteriophages by inserting pieces of their DNA into the host genome. This allowed the adaptive immune system to respond accordingly on a subsequent infection. It was discovered in Streptococcus pyogenes and later found across many other species.",95bccd58782e254d676218edb2bba106,1747.6,"[""doc_5""]","[""doc_5""]",0.5654,science,CRISPR,['doc_5'],['doc_5'],1.0,1.0,1.0,0.20512820512820512,1.0,1.0,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '2bb9850f3097eb12017235e7d70325ee'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '20282276cea07062f2ca16cc96e01541'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': 'e0546f417679f0b7aa963280be25110a'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+What is Vaccine and why is it important in science?,"stimulates the immune system to recognize and destroy specific disease-causing agents, providing immunity against infectious or malignant diseases. It is important in science because it is a highly effective and safe method for preventing infectious diseases, contributing to the eradication of diseases like smallpox and reducing the spread of others such as polio and measles. Vaccines also help combat antibiotic resistance by reducing infections that would otherwise require antibiotic treatment.",A vaccine is a biological preparation that provides active acquired immunity to a particular infectious or malignant disease. The safety and effectiveness of vaccines has been widely studied and verified. A vaccine typically contains an agent that resembles a disease-causing microorganism and is oft,"[Source: Vaccine]
+A vaccine is a biological preparation that provides active acquired immunity to a particular infectious or malignant disease. The safety and effectiveness of vaccines has been widely studied and verified. A vaccine typically contains an agent that resembles a disease-causing microorganism and is often made from weakened or killed forms of the microbe, its toxins, or one of its surface proteins
+
+---
+
+[Source: Vaccine]
+There is overwhelming scientific consensus that vaccines are a very safe and effective way to fight and eradicate infectious diseases. The immune system recognizes vaccine agents as foreign, destroys them, and ""remembers"" them
+
+---
+
+[Source: Vaccine]
+Vaccines can be prophylactic (to prevent or alleviate the effects of a future infection by a natural or ""wild"" pathogen), or therapeutic (to fight a disease that has already occurred, such as cancer). Some vaccines offer full sterilizing immunity, in which infection is prevented.
+
+---
+
+[Source: Vaccine]
+The administration of vaccines is called vaccination. Vaccination is the most effective method of preventing infectious diseases; widespread immunity due to vaccination is largely responsible for the worldwide eradication of smallpox and the restriction of diseases such as polio, measles, and tetanus from much of the world. The World Health Organization (WHO) reports that licensed vaccines are available for twenty-five different preventable infections.
+
+---
+
+[Source: Vaccine]
+Vaccines also help prevent the development of antibiotic resistance. For example, by greatly reducing the incidence of pneumonia caused by Streptococcus pneumoniae, vaccine programs have greatly reduced the prevalence of infections resistant to penicillin or other first-line antibiotics.",41cf3ed6190bfbfc5d585e618da0af1d,1570.8,"[""doc_26""]","[""doc_26""]",0.4465,science,Vaccine,['doc_26'],['doc_26'],1.0,1.0,1.0,0.1518987341772152,1.0,0.6,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '1ace63232160eac67a40130bee8b7abc'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '7bb70855e1bff5ce6fefa9e38b7403b9'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': '4528888f7be275c270804b21362ea105'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+How does Climate change work and what are its key applications?,"processes, such as increased water vapor, changes in cloud cover, and reduced Arctic ice, amplify warming. Climate models simulate physical, chemical, and biological processes—including natural and human factors—to predict future warming and emissions. Key applications include understanding past and present climate trends, projecting future climate impacts, assessing risks like extreme weather, and informing policy through scenarios that integrate societal factors with physical climate dynamics.",Present-day climate change includes both global warming—the ongoing increase in global average temperature—and its wider effects on Earth's climate system. Climate change in a broader sense also includes previous long-term changes to Earth's climate. The modern-day rise in global temperatures is dri,"[Source: Climate change]
+Present-day climate change includes both global warming—the ongoing increase in global average temperature—and its wider effects on Earth's climate system. Climate change in a broader sense also includes previous long-term changes to Earth's climate. The modern-day rise in global temperatures is driven by human activities, especially fossil fuel (coal, oil and natural gas) burning since the Industrial Revolution
+
+---
+
+[Source: Climate change]
+These feedback processes alter the pace of global warming. For instance, warmer air can hold more moisture in the form of water vapour, which is itself a potent greenhouse gas. Warmer air can also make clouds higher and thinner, and therefore more insulating, increasing climate warming. The reduction of snow cover and sea ice in the Arctic is another major feedback, this reduces the reflectivity of the Earth's surface in the region and accelerates Arctic warming
+
+---
+
+[Source: Climate change]
+A climate model is a representation of the physical, chemical and biological processes that affect the climate system. Models include natural processes like changes in the Earth's orbit, historical changes in the Sun's activity, and volcanic forcing. Models are used to estimate the degree of warming future emissions will cause when accounting for the strength of climate feedbacks
+
+---
+
+[Source: Climate change]
+The environmental effects of climate change are broad and far-reaching, affecting oceans, ice, and weather. Changes may occur gradually or rapidly. Evidence for these effects comes from studying climate change in the past, from modelling, and from modern observations. Since the 1950s, droughts and heat waves have appeared simultaneously with increasing frequency. Extremely wet or dry events within the monsoon period have increased in India and East Asia
+
+---
+
+[Source: Climate change]
+A subset of climate models add societal factors to a physical climate model. These models simulate how population, economic growth, and energy use affect—and interact with—the physical climate. With this information, these models can produce scenarios of future greenhouse gas emissions. This is then used as input for physical climate models and carbon cycle models to predict how atmospheric concentrations of greenhouse gases might change",a9fa0360d3a8a21c620a1484683182bf,1981.3,"[""doc_6""]","[""doc_6""]",0.7336,science,Climate change,['doc_6'],['doc_6'],1.0,1.0,1.0,0.03571428571428571,1.0,0.6,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '7313bb84c0cdcd956818f3c9a43c4ec4'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '1714a46286a492e60f802b1efeaa67bf'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.6, 'metadata': {'trace_id': '7d54473a93273aa05f77402b375b4a06'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.6
+What is Photosynthesis and why is it important in science?,"Photosynthesis is a biological process in which photopigment-bearing autotrophic organisms, such as plants, algae, and cyanobacteria, convert light energy (typically sunlight) into chemical energy, releasing oxygen as a byproduct through the splitting of water. It is important in science because it produces and maintains Earth's atmospheric oxygen and supplies most of the energy required for complex life.","Photosynthesis ( FOH-tə-SINTH-ə-sis) is a system of biological processes by which photopigment-bearing autotrophic organisms, such as most plants, algae and cyanobacteria, convert light energy — typically from sunlight — into the chemical energy necessary to fuel their metabolism. The term photosynt","[Source: Photosynthesis]
+Photosynthesis ( FOH-tə-SINTH-ə-sis) is a system of biological processes by which photopigment-bearing autotrophic organisms, such as most plants, algae and cyanobacteria, convert light energy — typically from sunlight — into the chemical energy necessary to fuel their metabolism. The term photosynthesis usually refers to oxygenic photosynthesis, a process that releases oxygen as a byproduct of water splitting
+
+---
+
+[Source: Photosynthesis]
+. Photosynthesis plays a critical role in producing and maintaining the oxygen content of the Earth's atmosphere, and it supplies most of the biological energy necessary for complex life on Earth.
+
+---
+
+[Source: Photosynthesis]
+== Experimental history ==
+
+
+=== Discovery ===
+Although some of the steps in photosynthesis are still not completely understood, the overall photosynthetic equation has been known since the 19th century.
+
+---
+
+[Source: Photosynthesis]
+=== Refinements ===
+Cornelis Van Niel made key discoveries explaining the chemistry of photosynthesis. By studying purple sulfur bacteria and green bacteria, he was the first to demonstrate that photosynthesis is a light-dependent redox reaction in which hydrogen reduces (donates its atoms as electrons and protons to) carbon dioxide.
+
+---
+
+[Source: Photosynthesis]
+. Modern photosynthesis in plants and most photosynthetic prokaryotes is oxygenic, using water as an electron donor, which is oxidized to molecular oxygen in the photosynthetic reaction center.",9b94f34594901b560204185529fdd709,1378.3,"[""doc_18""]","[""doc_18""]",0.5423,science,Photosynthesis,['doc_18'],['doc_18'],1.0,1.0,1.0,0.3333333333333333,1.0,0.6,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'a27e50649337f2e311b510e54bab21aa'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '07fa4e8debf9374dc2b482074fc62506'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': '54eb069f8891d88f4b9d88ef6e972960'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+What is Theory of relativity and why is it important in science?,"tivity (1905) and general relativity (1915). It describes the structure of spacetime and the nature of gravity, replacing classical mechanics in extreme conditions. It is important because it is a falsifiable, empirically tested framework based on well-established facts, with predictions like time dilation and the constancy of the speed of light confirmed by experiments. It revolutionized our understanding of physics, particularly in cosmology, astrophysics, and the fundamental forces of nature.","The theory of relativity comprises two physics theories by Albert Einstein: special relativity and general relativity, proposed and published in 1905 and 1915, respectively. Special relativity applies to all physical phenomena in the absence of gravity. General relativity explains the law of gravita","[Source: Theory of relativity]
+The theory of relativity comprises two physics theories by Albert Einstein: special relativity and general relativity, proposed and published in 1905 and 1915, respectively. Special relativity applies to all physical phenomena in the absence of gravity. General relativity explains the law of gravitation and its relation to the forces of nature. It applies to the cosmological and astrophysical realm, including astronomy.
+
+---
+
+[Source: Theory of relativity]
+Einstein explained that the theory of relativity falls under a category of scientific frameworks known as ""principle-theories""—theories that start not from speculative constructs or imagined mechanisms, but from well-established empirical facts and observed regularities in nature
+
+---
+
+[Source: Theory of relativity]
+== Special relativity ==
+
+Special relativity is a theory of the structure of spacetime. It was introduced in Einstein's 1905 paper ""On the Electrodynamics of Moving Bodies"" (for the contributions of many other physicists and mathematicians, see History of special relativity). Special relativity is based on two postulates which are contradictory in classical mechanics:
+
+---
+
+[Source: Theory of relativity]
+Relativity is a falsifiable theory: It makes predictions that can be tested by experiment. In the case of special relativity, these include the principle of relativity, the constancy of the speed of light, and time dilation. The predictions of special relativity have been confirmed in numerous tests since Einstein published his paper in 1905, but three experiments conducted between 1881 and 1938 were critical to its validation
+
+---
+
+[Source: Theory of relativity]
+The term ""theory of relativity"" was based on the expression ""relative theory"" (German: Relativtheorie) used in 1906 by Planck, who emphasized how the theory uses the principle of relativity. In the discussion section of the same paper, Alfred Bucherer used for the first time the expression ""theory of relativity"" (German: Relativitätstheorie).",90c1c8308e2ebce12d8c0351157fbfd8,2010.7,"[""doc_24""]","[""doc_24""]",0.5698,science,Theory of relativity,['doc_24'],['doc_24'],1.0,1.0,1.0,0.09210526315789473,1.0,0.8,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': 'c7d984210284fe61ee7b319f12f9bd10'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '45cc0c1d962f9abe87ced52b12e1720e'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': '1457848b51d8c938a0dc5f55fe04e544'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+How does Periodic table work and what are its key applications?,"The periodic table organizes elements by increasing atomic number, revealing periodic recurrences in their properties due to repeating electron configurations. It illustrates the periodic law, where properties are a periodic function of atomic number. Key applications include predicting element behavior, understanding trends in chemical and physical properties, and guiding research in chemistry, physics, and related sciences.","The periodic table, also known as the periodic table of the elements, is an ordered arrangement of the chemical elements into rows (""periods"") and columns (""groups""). An icon of chemistry, the periodic table is widely used in physics and other sciences. It is a depiction of the periodic law, which s","[Source: Periodic table]
+The periodic table, also known as the periodic table of the elements, is an ordered arrangement of the chemical elements into rows (""periods"") and columns (""groups""). An icon of chemistry, the periodic table is widely used in physics and other sciences. It is a depiction of the periodic law, which states that when the elements are arranged in order of their atomic numbers an approximate recurrence of their properties is evident
+
+---
+
+[Source: Periodic table]
+The periodic table is a graphic description of the periodic law, which states that the properties and atomic structures of the chemical elements are a periodic function of their atomic number. Elements are placed in the periodic table according to their electron configurations, the periodic recurrences of which explain the trends in properties across the periodic table.
+
+---
+
+[Source: Periodic table]
+Alternative periodic tables are often developed to highlight or emphasize chemical or physical properties of the elements that are not as apparent in traditional periodic tables, with different ones skewed more towards emphasizing chemistry or physics at either end. The many different forms of the periodic table have prompted the questions of whether there is an optimal or definitive form of the periodic table, and if so, what it might be
+
+---
+
+[Source: Periodic table]
+. As analogous configurations occur at regular intervals, the properties of the elements thus exhibit periodic recurrences, hence the name of the periodic table and the periodic law. These periodic recurrences were noticed well before the underlying theory that explains them was developed.
+
+---
+
+[Source: Periodic table]
+Periodic tables usually at least show the elements' symbols; many also provide supplementary information about the elements, either via colour-coding or as data in the cells. Tables may include extra information such as the names and atomic numbers of the elements, their blocks, natural occurrences, standard atomic weight, states of matter, melting and boiling points, densities, as well as provide different classifications of the elements.",09318f31cfe38a51379324b9bd106211,1156.3,"[""doc_17""]","[""doc_17""]",0.3991,science,Periodic table,['doc_17'],['doc_17'],1.0,1.0,1.0,0.18181818181818182,1.0,1.0,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '99f3796c288757b9276e567293987e44'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': 'f9a4bf746c1901c662d59ae1eceee1fc'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': 'f239d66be8c715bd59cf060309a916e0'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
+Explain the fundamental principles of Neuroscience.,"integrating physiology, anatomy, molecular biology, psychology, computer science, and other fields. It examines how neurons and neural circuits generate functions such as reflexes, sensory integration, motor control, learning, memory, and emotions. Fundamental principles include understanding neural signaling at the molecular and cellular level, the physiological and electrochemical processing of information in neurons, and the organization and function of neural circuits across multiple scales.","Neuroscience is the scientific study of the nervous system (the brain, spinal cord, and peripheral nervous system), its functions, and its disorders. It is a multidisciplinary science that combines physiology, anatomy, molecular biology, developmental biology, cytology, psychology, physics, computer","[Source: Neuroscience]
+Questions in systems neuroscience include how neural circuits are formed and used anatomically and physiologically to produce functions such as reflexes, multisensory integration, motor coordination, circadian rhythms, emotional responses, learning, and memory
+
+---
+
+[Source: Neuroscience]
+Neuroscience is the scientific study of the nervous system (the brain, spinal cord, and peripheral nervous system), its functions, and its disorders. It is a multidisciplinary science that combines physiology, anatomy, molecular biology, developmental biology, cytology, psychology, physics, computer science, chemistry, medicine, statistics, and mathematical modeling to understand the fundamental and emergent properties of neurons, glia, and neural circuits
+
+---
+
+[Source: Neuroscience]
+=== Molecular and cellular neuroscience ===
+
+---
+
+[Source: Neuroscience]
+The scope of neuroscience has broadened over time to include different approaches used to study the nervous system at different scales. The techniques used by neuroscientists have expanded enormously, from molecular and cellular studies of individual neurons to imaging of sensory, motor, and cognitive tasks in the brain.
+
+---
+
+[Source: Neuroscience]
+Questions addressed in cellular neuroscience include the mechanisms of how neurons process signals physiologically and electrochemically. These questions include how signals are processed by neurites and somas and how neurotransmitters and electrical signals are used to process information in a neuron",e1c7ded03d4c700f8d46a85cb0c6015f,1903.4,"[""doc_16""]","[""doc_16""]",0.6855,science,Neuroscience,['doc_16'],['doc_16'],1.0,1.0,1.0,0.1388888888888889,1.0,1.0,"{'name': 'hallucination', 'score': 1.0, 'label': 'FAITHFUL', 'metadata': {'trace_id': '51d5645573a1d145101c3b20c7b200c0'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'relevance', 'score': 1.0, 'label': 'HIGH', 'metadata': {'trace_id': '2a639ce36d6a43b3c8c72568a7920a41'}, 'kind': 'llm', 'direction': 'maximize'}","{'name': 'correctness', 'score': 0.95, 'metadata': {'trace_id': '8fc32ad998013535e5916a69f647bd06'}, 'kind': 'llm', 'direction': 'maximize'}",FAITHFUL,1.0,HIGH,1.0,0.95
